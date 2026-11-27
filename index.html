@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Para Jimena · 27 de noviembre</title>
+  <meta name="description" content="Una carta sellada para ti, mi cielo. Ábrela con calma y sube el volumen.">
+  <meta name="theme-color" content="#F1E4CB">
+  <meta name="robots" content="noindex">
+
+  <!-- Vista previa al compartir el enlace (WhatsApp necesita la dirección completa de la imagen) -->
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="es_CO">
+  <meta property="og:title" content="Una carta para ti, mi cielo">
+  <meta property="og:description" content="Ha llegado una carta sellada para Lady Jimena. Ábrela con calma… y sube el volumen.">
+  <meta property="og:url" content="https://jvsasesoriaempresarialcontableyf.github.io/para-cielo/">
+  <meta property="og:image" content="https://jvsasesoriaempresarialcontableyf.github.io/para-cielo/vista-previa.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='30' fill='%238E2A3A'/%3E%3Ccircle cx='32' cy='32' r='24' fill='none' stroke='%23F1E0B0' stroke-width='2'/%3E%3Ctext x='32' y='43' text-anchor='middle' font-family='Georgia,serif' font-style='italic' font-size='30' fill='%23F1E0B0'%3EJ%3C/text%3E%3C/svg%3E">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600&family=Cormorant+Garamond:ital,wght@1,500&family=Pinyon+Script&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body { margin: 0; height: 100%; overflow: hidden; background: #F1E4CB; }
+    #tarjeta { position: fixed; inset: 0; width: 100%; height: 100%; border: 0; display: block; background: #F1E4CB; }
+
+    /* Pantalla de carga: papel marfil, filete dorado, sello de lacre que respira */
+    #carga {
+      position: fixed; inset: 0; z-index: 2; display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: 14px; padding: 24px; text-align: center; color: #2B2236;
+      background: radial-gradient(ellipse 90% 60% at 50% 35%, #FFFDF8 0%, #FBF6EC 45%, #F1E4CB 100%);
+      transition: opacity .8s ease, visibility .8s;
+    }
+    #carga::before { content: ''; position: absolute; inset: 14px; border: 1px solid rgba(201, 164, 92, .7); outline: 1px solid rgba(201, 164, 92, .35); outline-offset: 5px; pointer-events: none; }
+    #carga.listo { opacity: 0; visibility: hidden; }
+    .rotulo { font: 600 12px/1 'Cinzel', Georgia, serif; letter-spacing: .32em; color: #4D6B8F; }
+    .nombre { font: 400 clamp(48px, 14vw, 72px)/1.1 'Pinyon Script', cursive; color: #2B2236; margin: 4px 0 2px; }
+    .filete { width: min(240px, 60vw); height: 1px; background: linear-gradient(90deg, transparent, #C9A45C, transparent); }
+    .sello {
+      width: 74px; height: 74px; border-radius: 50%; margin-top: 10px; display: grid; place-items: center;
+      background: radial-gradient(circle at 38% 32%, #D16478 0%, #B9485A 30%, #8E2A3A 62%, #5C1424 100%);
+      box-shadow: 0 6px 14px rgba(92, 20, 36, .35), inset 0 -4px 8px rgba(0, 0, 0, .25), inset 0 3px 6px rgba(255, 255, 255, .25);
+      animation: respira 2.4s ease-in-out infinite;
+    }
+    .sello span { font: italic 500 34px/1 'Cormorant Garamond', Georgia, serif; color: #F1E0B0; text-shadow: 0 1px 1px rgba(0, 0, 0, .35); }
+    @keyframes respira { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.06); } }
+    .estado { font: italic 500 18px/1.4 'Cormorant Garamond', Georgia, serif; color: #5A4D63; min-height: 1.4em; }
+    .acciones { display: none; flex-direction: column; gap: 10px; margin-top: 6px; }
+    .acciones.ver { display: flex; }
+    .acciones button, .acciones a {
+      font: 600 13px/1 'Cinzel', Georgia, serif; letter-spacing: .14em; text-transform: uppercase; text-decoration: none;
+      color: #2B2236; background: linear-gradient(#FFFDF8, #F1E4CB); border: 1px solid #C9A45C; border-radius: 999px;
+      padding: 14px 22px; min-height: 48px; cursor: pointer;
+    }
+    @media (prefers-reduced-motion: reduce) { .sello { animation: none; } }
+  </style>
+</head>
+<body>
+  <div id="carga" role="status" aria-live="polite">
+    <div class="rotulo">HA LLEGADO UNA CARTA</div>
+    <div class="nombre">Para Jimena</div>
+    <div class="filete" aria-hidden="true"></div>
+    <div class="sello" aria-hidden="true"><span>J</span></div>
+    <div class="estado" id="estado">Preparando tu sorpresa… sube el volumen</div>
+    <div class="acciones" id="acciones">
+      <button type="button" id="reintentar">Volver a intentar</button>
+      <a id="otra" target="_blank" rel="noopener">Abrir en otra pestaña</a>
+    </div>
+  </div>
+
+  <iframe id="tarjeta" title="Tarjeta de cumpleaños para Jimena" allow="autoplay; fullscreen; clipboard-write" allowfullscreen></iframe>
+
+  <script>
+    (function () {
+      'use strict';
+      var URL_EXEC = 'https://script.google.com/macros/s/AKfycbxfC8GzpKDDhISOhULffHnQu3GUCCUX-iPIEa1kaPkLYNLX4P5CVVZ-ZtIBn8EOgS-W/exec';
+      var marco = document.getElementById('tarjeta');
+      var carga = document.getElementById('carga');
+      var estado = document.getElementById('estado');
+      var acciones = document.getElementById('acciones');
+      var temporizador = null;
+      document.getElementById('otra').href = URL_EXEC;
+
+      function abrir() {
+        acciones.classList.remove('ver');
+        estado.textContent = 'Preparando tu sorpresa… sube el volumen';
+        carga.classList.remove('listo');
+        clearTimeout(temporizador);
+        temporizador = setTimeout(function () {
+          estado.textContent = 'La conexión está un poco lenta…';
+          acciones.classList.add('ver');
+        }, 25000);
+        marco.src = URL_EXEC + (URL_EXEC.indexOf('?') === -1 ? '?' : '&') + 'v=' + Date.now();
+      }
+      marco.addEventListener('load', function () {
+        if (!marco.src) return;
+        clearTimeout(temporizador);
+        setTimeout(function () { carga.classList.add('listo'); }, 900);
+      });
+      document.getElementById('reintentar').addEventListener('click', abrir);
+      abrir();
+    })();
+  </script>
+</body>
+</html>
